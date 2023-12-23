@@ -1,9 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:ne_izlesem/models/movie.dart';
+import 'package:ne_izlesem/screens/search_screen.dart';
 import 'package:ne_izlesem/services/api_service.dart';
 import 'package:ne_izlesem/widgets/movies_slider.dart';
 import 'package:ne_izlesem/widgets/trending_slider.dart';
+
+import '../colors.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Movie>> trendingMovies;
   late Future<List<Movie>> topRatedMovies;
   late Future<List<Movie>> upComingMovies;
+
 
   void initState() {
     super.initState();
@@ -54,6 +58,26 @@ class _HomeScreenState extends State<HomeScreen> {
               Text('Hoşgeldiniz.', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
               Text('Milyonlarca Film, Tv Şovu. Şimdi Keşfedin.', style: TextStyle(fontSize: 15,),),
               SizedBox(height: 30,),
+              TextField(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+                },
+                textInputAction: TextInputAction.none,
+                keyboardType: TextInputType.none,
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colours.searchBgColor,
+                  hintText: "Hangi Filmi arıyorsun?",
+                  prefixIcon: Icon(Icons.search),
+                  prefixIconColor: Colours.scaffoldBgColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
               Text(
                 'Trend Movies',
                 style: TextStyle(fontSize: 18),

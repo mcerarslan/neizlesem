@@ -29,6 +29,7 @@ class DetailScreen extends StatelessWidget {
                 icon: Icon(Icons.arrow_back_rounded),
               ),
             ),
+
             backgroundColor: Colours.scaffoldBgColor,
             expandedHeight: 500,
             pinned: true,
