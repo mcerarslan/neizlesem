@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "958924478644",
+    "project_id": "neizlesem-92223",
+    "storage_bucket": "neizlesem-92223.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958924478644:android:20325c60b668bee6b81fe1",
+        "android_client_info": {
+          "package_name": "com.example.ne_izlesem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDEpMWhWeBNXBfW8oJ90n1xt2d2HKkjUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

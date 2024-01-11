@@ -4,6 +4,8 @@ import 'package:ne_izlesem/constant.dart';
 import 'package:ne_izlesem/models/movie.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/video.dart';
+
 class Api{
   static const _trendingUrl = 'https://api.themoviedb.org/3/trending/movie/day?api_key=${Constants.apiKey}';
   static const _topRatedUrl = 'https://api.themoviedb.org/3/movie/top_rated?api_key=${Constants.apiKey}';
@@ -36,6 +38,23 @@ class Api{
       return decodedData.map((movie) => Movie.fromJson(movie)).toList();
     }else{
       throw Exception('Something Happened');
+    }
+  }
+}
+class MovieService {
+  static const String _baseUrl = 'https://api.themoviedb.org/3';
+
+  Future<List<Video>> fetchVideosForMovie(int movieId) async {
+    final response = await http.get(
+      Uri.parse('$_baseUrl/movie/$movieId/videos?api_key=${Constants.apiKey}'),
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+      return results.map((json) => Video.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load videos');
     }
   }
 }

@@ -1,12 +1,16 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ne_izlesem/models/movie.dart';
+import 'package:ne_izlesem/screens/menu.dart';
 import 'package:ne_izlesem/screens/search_screen.dart';
 import 'package:ne_izlesem/services/api_service.dart';
 import 'package:ne_izlesem/widgets/movies_slider.dart';
 import 'package:ne_izlesem/widgets/trending_slider.dart';
 
 import '../colors.dart';
+import '../models/user.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -22,18 +26,29 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Movie>> trendingMovies;
   late Future<List<Movie>> topRatedMovies;
   late Future<List<Movie>> upComingMovies;
-
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
 
   void initState() {
     super.initState();
     trendingMovies = Api().getTrendingMovie();
     topRatedMovies = Api().getTopRatedMovie();
     upComingMovies = Api().getUpComingMovie();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {
 
+      });
+    });
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Menu(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -55,8 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 40,
               ),
-              Text('Hoşgeldiniz.', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
-              Text('Milyonlarca Film, Tv Şovu. Şimdi Keşfedin.', style: TextStyle(fontSize: 15,),),
+              Text('Hoşgeldin, ${loggedInUser.firstName}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
+              Text('Milyonlarca Filmi, Şimdi Keşfet.', style: TextStyle(fontSize: 15,),),
+
               SizedBox(height: 30,),
               TextField(
                 onTap: (){

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ne_izlesem/colors.dart';
 import 'package:ne_izlesem/screens/home_screen.dart';
+import 'package:ne_izlesem/screens/login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), (){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()),
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()),
       );
     });
   }
